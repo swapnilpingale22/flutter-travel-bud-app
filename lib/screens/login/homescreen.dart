@@ -2,19 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
+import 'package:travel_bud/screens/onbooarding/homestay_title_screen.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  static const String routeName = '/login-screen';
+  const LoginScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   final _signInFormKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isChecked = false;
+
   @override
   void dispose() {
     super.dispose();
@@ -116,7 +119,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 CustomButton(
                   text: 'Login',
                   onTap: () {
-                    if (_signInFormKey.currentState!.validate()) {}
+                    if (_signInFormKey.currentState!.validate()) {
+                      Navigator.pushNamed(
+                        context,
+                        HomeStayTitle.routeName,
+                      );
+                    }
                   },
                 ),
                 const SizedBox(height: 10),
