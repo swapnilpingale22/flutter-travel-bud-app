@@ -32,7 +32,7 @@ class CustomListTile extends StatelessWidget {
             ),
             const SizedBox(width: 5),
             Text(
-              count.toString(),
+              (count < 10) ? '0$count' : count.toString(),
               style: const TextStyle(
                 fontSize: 14,
               ),

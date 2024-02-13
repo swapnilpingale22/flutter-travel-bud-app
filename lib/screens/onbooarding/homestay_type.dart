@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_tile.dart';
+import 'package:travel_bud/constants/global_varialbles.dart';
 import 'package:travel_bud/screens/onbooarding/accommodation_details.dart';
 
 class HomestayTypeScreen extends StatefulWidget {
@@ -40,41 +41,19 @@ class _HomestayTypeScreenState extends State<HomestayTypeScreen> {
         child: Column(
           children: [
             GridView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisExtent: 130,
               ),
-              children: const [
-                CustomTile(
-                  assetPath: 'assets/images/traditional.svg',
-                  text: 'Traditional',
-                  color: Colors.blue,
-                  bordeColor: Colors.blue,
-                ),
-                CustomTile(
-                  assetPath: 'assets/images/bedbreakfast.svg',
-                  text: 'Bed & Breakfast',
-                ),
-                CustomTile(
-                  assetPath: 'assets/images/urban.svg',
-                  text: 'Urban',
-                ),
-                CustomTile(
-                  assetPath: 'assets/images/ecofriendly.svg',
-                  text: 'Eco-Friendly',
-                ),
-                CustomTile(
-                  assetPath: 'assets/images/adventure.svg',
-                  text: 'Adventure',
-                ),
-                CustomTile(
-                  assetPath: 'assets/images/luxury.svg',
-                  text: 'Luxury',
-                ),
-              ],
-            ),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: GlobalVariables.homestayType.map((value) {
+                return CustomTile(
+                  assetPath: value['icon'].toString(),
+                  text: value['title'].toString(),
+                );
+              }).toList(),
+            ), 
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
