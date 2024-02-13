@@ -163,12 +163,14 @@ class _AmenitiesScreenState extends State<AmenitiesScreen> {
                   children: [
                     CustomButton(
                       text: 'Next',
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          CheckInOutDetailsScreen.routeName,
-                        );
-                      },
+                      onTap: amenities.isNotEmpty
+                          ? () {
+                              Navigator.pushNamed(
+                                context,
+                                CheckInOutDetailsScreen.routeName,
+                              );
+                            }
+                          : null,
                     ),
                     const SizedBox(height: 10),
                     InkWell(

@@ -13,6 +13,9 @@ class HomestayTypeScreen extends StatefulWidget {
 }
 
 class _HomestayTypeScreenState extends State<HomestayTypeScreen> {
+  String selectedItem = '';
+  bool _isButtonEnabled = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,23 +51,40 @@ class _HomestayTypeScreenState extends State<HomestayTypeScreen> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               children: GlobalVariables.homestayType.map((value) {
-                return CustomTile(
-                  assetPath: value['icon'].toString(),
-                  text: value['title'].toString(),
+                String title = value['title'].toString();
+                String path = value['icon'].toString();
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      selectedItem = title;
+                      _isButtonEnabled = selectedItem.isNotEmpty;
+                    });
+                  },
+                  child: CustomTile(
+                    assetPath: path,
+                    text: title,
+                    bordeColor:
+                        selectedItem == title ? Colors.blue : Colors.black26,
+                    color: selectedItem == title ? Colors.blue : Colors.black26,
+                    textColor:
+                        selectedItem == title ? Colors.blue : Colors.black,
+                  ),
                 );
               }).toList(),
-            ), 
+            ),
             Expanded(
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: CustomButton(
                   text: 'Next',
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      AccommodationDetailsScreen.routeName,
-                    );
-                  },
+                  onTap: _isButtonEnabled
+                      ? () {
+                          Navigator.pushNamed(
+                            context,
+                            AccommodationDetailsScreen.routeName,
+                          );
+                        }
+                      : null,
                 ),
               ),
             )

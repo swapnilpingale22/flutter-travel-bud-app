@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:travel_bud/common_widgets/confirm_dialog.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_listtile.dart';
-import 'package:travel_bud/common_widgets/custom_switch.dart';
+import 'package:travel_bud/common_widgets/custom_named_switch.dart';
 import 'package:travel_bud/screens/onbooarding/amenities.dart';
 
 enum Place {
@@ -158,9 +158,8 @@ class _AccommodationDetailsScreenState
                 title: 'Bathrooms',
                 count: 06,
               ),
-              const CustomSwitch(
+              const CustomNamedSwitch(
                 title: 'Kitchen Avaible',
-                // value: true,
               ),
               const SizedBox(height: 30),
               CustomButton(

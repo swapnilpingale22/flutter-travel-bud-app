@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
+import 'package:travel_bud/screens/onbooarding/location.dart';
 
 class CheckInOutDetailsScreen extends StatefulWidget {
   static const String routeName = '/check-in-out';
@@ -108,7 +109,14 @@ class _CheckInOutDetailsScreenState extends State<CheckInOutDetailsScreen> {
                   children: [
                     CustomButton(
                       text: 'Next',
-                      onTap: () {},
+                      onTap: _checkInTime != _checkOutTime
+                          ? () {
+                              Navigator.pushNamed(
+                                context,
+                                LocationScreen.routeName,
+                              );
+                            }
+                          : null,
                     ),
                     const SizedBox(height: 30),
                   ],
