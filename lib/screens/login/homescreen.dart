@@ -1,8 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
-import 'package:travel_bud/screens/onbooarding/homestay_title_screen.dart';
+import 'package:travel_bud/screens/onbooarding/homestay_title.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login-screen';

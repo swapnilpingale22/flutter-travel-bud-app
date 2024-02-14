@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_tile.dart';
+import 'package:travel_bud/common_widgets/stepper.dart';
 import 'package:travel_bud/screens/onbooarding/homestay_description.dart';
 
 class PhotosScreen extends StatefulWidget {
@@ -17,21 +18,37 @@ class _PhotosScreenState extends State<PhotosScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Column(
+        automaticallyImplyLeading: false,
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Photos',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'Lorem ipsum dolor sit amet consectetur.',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.black26,
-              ),
+            const CustomStepper(index: 7),
+            Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios)),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Photos',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Lorem ipsum dolor sit amet consectetur.',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black26,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:travel_bud/common_widgets/confirm_dialog.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_listtile.dart';
 import 'package:travel_bud/common_widgets/custom_named_switch.dart';
+import 'package:travel_bud/common_widgets/stepper.dart';
 import 'package:travel_bud/screens/onbooarding/amenities.dart';
 
 enum Place {
@@ -28,21 +29,37 @@ class _AccommodationDetailsScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Column(
+        automaticallyImplyLeading: false,
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Accomodation Details',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'Lorem ipsum dolor sit amet consectetur.',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.black26,
-              ),
+            const CustomStepper(index: 2),
+            Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios)),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Accomodation Details',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Lorem ipsum dolor sit amet consectetur.',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black26,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

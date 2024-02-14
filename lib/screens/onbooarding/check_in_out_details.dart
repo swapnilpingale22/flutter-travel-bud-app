@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
+import 'package:travel_bud/common_widgets/stepper.dart';
 import 'package:travel_bud/screens/onbooarding/location.dart';
 
 class CheckInOutDetailsScreen extends StatefulWidget {
@@ -22,21 +23,37 @@ class _CheckInOutDetailsScreenState extends State<CheckInOutDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Column(
+        automaticallyImplyLeading: false,
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Check-in/out Details',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'Lorem ipsum dolor sit amet consectetur.',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.black26,
-              ),
+            const CustomStepper(index: 4),
+            Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios)),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Check-in/out Details',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Lorem ipsum dolor sit amet consectetur.',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black26,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

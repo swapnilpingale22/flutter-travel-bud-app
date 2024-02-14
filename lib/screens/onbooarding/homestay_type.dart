@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_tile.dart';
+import 'package:travel_bud/common_widgets/stepper.dart';
 import 'package:travel_bud/constants/global_varialbles.dart';
 import 'package:travel_bud/screens/onbooarding/accommodation_details.dart';
 
@@ -20,21 +21,37 @@ class _HomestayTypeScreenState extends State<HomestayTypeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Column(
+        automaticallyImplyLeading: false,
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Homestay Type',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'Lorem ipsum dolor sit amet consectetur.',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.black26,
-              ),
+            const CustomStepper(index: 1),
+            Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios)),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Homestay Type',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Lorem ipsum dolor sit amet consectetur.',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black26,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

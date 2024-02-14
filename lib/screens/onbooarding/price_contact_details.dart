@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:travel_bud/common_widgets/custom_amenity.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
+import 'package:travel_bud/common_widgets/stepper.dart';
 import 'package:travel_bud/screens/onbooarding/preview.dart';
 
 class PriceContactDetailsScreen extends StatefulWidget {
@@ -24,21 +25,37 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Column(
+        automaticallyImplyLeading: false,
+        title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Price and Contact Details',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'Lorem ipsum dolor sit amet consectetur.',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.black26,
-              ),
+            const CustomStepper(index: 8),
+            Row(
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back_ios)),
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Price and Contact Details',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Lorem ipsum dolor sit amet consectetur.',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black26,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

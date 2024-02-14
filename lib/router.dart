@@ -5,7 +5,7 @@ import 'package:travel_bud/screens/onbooarding/add_amenities.dart';
 import 'package:travel_bud/screens/onbooarding/amenities.dart';
 import 'package:travel_bud/screens/onbooarding/check_in_out_details.dart';
 import 'package:travel_bud/screens/onbooarding/homestay_description.dart';
-import 'package:travel_bud/screens/onbooarding/homestay_title_screen.dart';
+import 'package:travel_bud/screens/onbooarding/homestay_title.dart';
 import 'package:travel_bud/screens/onbooarding/homestay_type.dart';
 import 'package:travel_bud/screens/login/homescreen.dart';
 import 'package:travel_bud/screens/onbooarding/location.dart';

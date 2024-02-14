@@ -275,6 +275,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  progress_stepper:
+    dependency: "direct main"
+    description:
+      name: progress_stepper
+      sha256: "5c41d90529986e93bc96165ff2968a915f726aa586674b86d8fe1667fcf10ef2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
