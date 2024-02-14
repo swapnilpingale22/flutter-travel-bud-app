@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
+import 'package:travel_bud/screens/onbooarding/price_contact_details.dart';
 
 class HomestayDescriptionScreen extends StatefulWidget {
   static const String routeName = '/homestay-desc';
@@ -91,7 +92,14 @@ class _HomestayDescriptionScreenState extends State<HomestayDescriptionScreen> {
                 alignment: Alignment.bottomCenter,
                 child: CustomButton(
                   text: 'Next',
-                  onTap: _isButtonEnabled ? () {} : null,
+                  onTap: _isButtonEnabled
+                      ? () {
+                          Navigator.pushNamed(
+                            context,
+                            PriceContactDetailsScreen.routeName,
+                          );
+                        }
+                      : null,
                 ),
               ),
             ),

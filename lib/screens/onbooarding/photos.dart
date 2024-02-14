@@ -73,7 +73,7 @@ class _PhotosScreenState extends State<PhotosScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisExtent: 130,
+                  mainAxisExtent: 120,
                 ),
                 itemBuilder: (context, index) {
                   return Padding(

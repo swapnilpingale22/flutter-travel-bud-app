@@ -99,3 +99,31 @@ Future<void> showLocationDialog(BuildContext context) async {
     },
   );
 }
+
+Future<void> showCongratulationsDialog(BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        icon: SvgPicture.asset('assets/images/party.svg'),
+        title: const Text('Congratulations'),
+        content: const Text(
+          'Congratulations , you are one step away from getting your property listed. \n\nReview process would be completed within 48 hours.',
+          style: TextStyle(
+            color: Colors.black38,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        actions: <Widget>[
+          CustomButton(
+            text: 'Okay',
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
