@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travel_bud/common_widgets/stepper.dart';
 import 'package:travel_bud/screens/onbooarding/address.dart';
 import 'package:travel_bud/common_widgets/confirm_dialog.dart';
@@ -15,6 +16,7 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  LatLng puneLocation = const LatLng(18.5204, 73.8567);
   @override
   void initState() {
     super.initState();
@@ -68,14 +70,12 @@ class _LocationScreenState extends State<LocationScreen> {
       ),
       body: Stack(
         children: [
-          Container(
-            margin: const EdgeInsets.only(top: 20),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/map.jpg'),
-                fit: BoxFit.cover,
-              ),
+          GoogleMap(
+            initialCameraPosition: CameraPosition(
+              target: puneLocation,
+              zoom: 12,
             ),
+            mapType: MapType.hybrid,
           ),
           Container(
             height: 40,
