@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
+import 'package:travel_bud/screens/login/sign_up_screen.dart';
 import 'package:travel_bud/screens/onbooarding/homestay_title.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -18,6 +20,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _isChecked = false;
+  final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+  bool _isPasswordVisible = false;
+  bool _isObscure = true;
 
   @override
   void dispose() {
@@ -72,17 +77,48 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: _emailController,
                           hintText: 'Enter your email',
                           keyboardType: TextInputType.emailAddress,
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Please enter your Email';
+                            }
+                            if (!emailRegex.hasMatch(val)) {
+                              return 'Please enter a valid email';
+                            }
+                            return null;
+                          },
                         ),
                         const SizedBox(height: 20),
                         const Text('Password'),
                         CustomTextField(
                           controller: _passwordController,
                           hintText: 'Enter your password',
-                          obscureTextValue: true,
-                          suffixIcon: const Icon(
-                            Icons.remove_red_eye,
-                            color: Colors.black26,
+                          obscureTextValue: _isObscure,
+                          suffixIcon: IconButton(
+                            icon: _isPasswordVisible
+                                ? const Icon(
+                                    CupertinoIcons.eye_slash_fill,
+                                    color: Colors.blue,
+                                  )
+                                : const Icon(
+                                    CupertinoIcons.eye_fill,
+                                    color: Colors.black26,
+                                  ),
+                            onPressed: () {
+                              setState(() {
+                                _isObscure = !_isObscure;
+                                _isPasswordVisible = !_isPasswordVisible;
+                              });
+                            },
                           ),
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return 'Please enter your Password';
+                            }
+                            if (val.length < 6) {
+                              return 'Password must be at least 6 characters';
+                            }
+                            return null;
+                          },
                         ),
                         const SizedBox(height: 5),
                         SizedBox(
@@ -163,7 +199,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     const Text('Dont have an account? '),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          SignUpScreen.routeName,
+                        );
+                      },
                       child: const Text(
                         'Sign up',
                         style: TextStyle(color: Colors.blue),

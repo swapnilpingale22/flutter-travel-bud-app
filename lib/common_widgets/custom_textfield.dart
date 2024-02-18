@@ -7,7 +7,8 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool obscureTextValue;
   final int maxLines;
-  final Icon? suffixIcon;
+  final Widget? suffixIcon;
+  final String? Function(String?)? validator;
   const CustomTextField({
     Key? key,
     required this.controller,
@@ -16,6 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureTextValue = false,
     this.maxLines = 1,
     this.suffixIcon,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -55,12 +57,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
       ),
-      validator: (val) {
-        if (val == null || val.isEmpty) {
-          return hintText;
-        }
-        return null;
-      },
+      validator: validator,
       maxLines: maxLines,
     );
   }

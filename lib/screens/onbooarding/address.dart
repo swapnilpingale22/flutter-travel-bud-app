@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_switch.dart';
+import 'package:travel_bud/common_widgets/custom_text_field_title.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
 import 'package:travel_bud/common_widgets/drop_down.dart';
 import 'package:travel_bud/common_widgets/stepper.dart';
@@ -89,14 +90,30 @@ class _AddresssScreenState extends State<AddresssScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Address'),
+                              const CustomTextFieldTitle(
+                                title: 'Address',
+                              ),
                               CustomTextField(
+                                validator: (val) {
+                                  if (val == null || val.isEmpty) {
+                                    return 'Please enter your address';
+                                  }
+                                  return null;
+                                },
                                 controller: _addressController,
                                 hintText: 'Enter your address',
                               ),
                               const SizedBox(height: 10),
-                              const Text('Street Address'),
+                              const CustomTextFieldTitle(
+                                title: 'Street Address',
+                              ),
                               CustomTextField(
+                                validator: (val) {
+                                  if (val == null || val.isEmpty) {
+                                    return 'Please enter your street address';
+                                  }
+                                  return null;
+                                },
                                 controller: _streetAddressController,
                                 hintText: 'Enter your street address',
                               ),
@@ -107,20 +124,42 @@ class _AddresssScreenState extends State<AddresssScreen> {
                                 hintText: 'Enter your landmark',
                               ),
                               const SizedBox(height: 10),
-                              const Text('City/Town'),
+                              const CustomTextFieldTitle(
+                                title: 'City/Town',
+                              ),
                               CustomTextField(
+                                validator: (val) {
+                                  if (val == null || val.isEmpty) {
+                                    return 'Please enter your city';
+                                  }
+                                  return null;
+                                },
                                 controller: _cityTownController,
                                 hintText: 'Enter your city',
                               ),
                               const SizedBox(height: 10),
-                              const Text('Pin code'),
+                              const CustomTextFieldTitle(
+                                title: 'Pin code',
+                              ),
                               CustomTextField(
+                                validator: (val) {
+                                  if (val == null || val.isEmpty) {
+                                    return 'Please enter your pincode';
+                                  }
+                                  if (val.length < 6) {
+                                    return 'Enter maximum 6 digit number';
+                                  }
+
+                                  return null;
+                                },
                                 controller: _pincodeController,
                                 hintText: 'Enter your pin code',
                                 keyboardType: TextInputType.number,
                               ),
                               const SizedBox(height: 10),
-                              const Text('State'),
+                              const CustomTextFieldTitle(
+                                title: 'State',
+                              ),
                               const StateDropdown(),
                               const CustomSwitch(
                                 title: 'Show your specific location',

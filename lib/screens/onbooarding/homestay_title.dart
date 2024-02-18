@@ -85,6 +85,12 @@ class _HomeStayTitleState extends State<HomeStayTitle> {
             Stack(
               children: [
                 CustomTextField(
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return 'Please enter your title';
+                    }
+                    return null;
+                  },
                   controller: _titleController,
                   hintText: 'Enter your title',
                   maxLines: 2,

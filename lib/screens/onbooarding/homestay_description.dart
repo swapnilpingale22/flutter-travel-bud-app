@@ -86,6 +86,12 @@ class _HomestayDescriptionScreenState extends State<HomestayDescriptionScreen> {
             Stack(
               children: [
                 CustomTextField(
+                  validator: (val) {
+                    if (val == null || val.isEmpty) {
+                      return 'Please enter your description';
+                    }
+                    return null;
+                  },
                   controller: _descriptionController,
                   hintText: 'Enter your description',
                   maxLines: 2,

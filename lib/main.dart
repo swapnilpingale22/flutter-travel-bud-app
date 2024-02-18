@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_bud/router.dart';
-import 'package:travel_bud/screens/login/homescreen.dart';
+import 'package:travel_bud/screens/login/login_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {

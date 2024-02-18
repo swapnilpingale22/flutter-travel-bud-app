@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_bud/screens/login/sign_up_screen.dart';
 import 'package:travel_bud/screens/onbooarding/address.dart';
 import 'package:travel_bud/screens/onbooarding/accommodation_details.dart';
 import 'package:travel_bud/screens/onbooarding/add_amenities.dart';
@@ -7,7 +8,7 @@ import 'package:travel_bud/screens/onbooarding/check_in_out_details.dart';
 import 'package:travel_bud/screens/onbooarding/homestay_description.dart';
 import 'package:travel_bud/screens/onbooarding/homestay_title.dart';
 import 'package:travel_bud/screens/onbooarding/homestay_type.dart';
-import 'package:travel_bud/screens/login/homescreen.dart';
+import 'package:travel_bud/screens/login/login_screen.dart';
 import 'package:travel_bud/screens/onbooarding/location.dart';
 import 'package:travel_bud/screens/onbooarding/photos.dart';
 import 'package:travel_bud/screens/onbooarding/preview.dart';
@@ -20,6 +21,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const LoginScreen(),
+      );
+
+    case SignUpScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const SignUpScreen(),
       );
 
     case HomeStayTitle.routeName:

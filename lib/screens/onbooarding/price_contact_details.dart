@@ -85,6 +85,12 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
                             children: [
                               Expanded(
                                 child: CustomTextField(
+                                  validator: (val) {
+                                    if (val == null || val.isEmpty) {
+                                      return 'Please enter start price';
+                                    }
+                                    return null;
+                                  },
                                   controller: _startPriceController,
                                   hintText: 'Enter start price',
                                   keyboardType: TextInputType.number,
@@ -96,6 +102,12 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
                               ),
                               Expanded(
                                 child: CustomTextField(
+                                  validator: (val) {
+                                    if (val == null || val.isEmpty) {
+                                      return 'Please enter end price';
+                                    }
+                                    return null;
+                                  },
                                   controller: _endPriceController,
                                   hintText: 'Enter end price',
                                   keyboardType: TextInputType.number,
@@ -120,6 +132,12 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
                             ),
                           ),
                           CustomTextField(
+                            validator: (val) {
+                              if (val == null || val.isEmpty) {
+                                return 'Please enter your contact number';
+                              }
+                              return null;
+                            },
                             controller: _contactNoController,
                             hintText: 'Enter your contact number',
                             keyboardType: TextInputType.number,
@@ -133,6 +151,12 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
                             ),
                           ),
                           CustomTextField(
+                            validator: (val) {
+                              if (val == null || val.isEmpty) {
+                                return 'Please enter your email';
+                              }
+                              return null;
+                            },
                             controller: _emailController,
                             hintText: 'Enter your email',
                             keyboardType: TextInputType.emailAddress,
