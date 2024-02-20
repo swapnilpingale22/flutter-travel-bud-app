@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
+import 'package:travel_bud/services/auth_services.dart';
 
 Future<void> showConfirmDialog(BuildContext context) async {
   return showDialog<void>(
@@ -121,6 +122,34 @@ Future<void> showCongratulationsDialog(BuildContext context) async {
             onTap: () {
               Navigator.pop(context);
             },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<void> showLogOutDialog(BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Confirmation'),
+        content: const Text('Do you want to log out?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: const Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              AuthService().logOut(context);
+            },
+            child: const Text('Yes'),
           ),
         ],
       );

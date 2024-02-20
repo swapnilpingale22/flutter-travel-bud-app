@@ -58,68 +58,68 @@ class _CheckInOutDetailsScreenState extends State<CheckInOutDetailsScreen> {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Check-in Time'),
-            SizedBox(
-              height: 200,
-              child: CupertinoTimerPicker(
-                mode: CupertinoTimerPickerMode.hm,
-                initialTimerDuration: _checkInTime,
-                onTimerDurationChanged: (value) {
-                  setState(() {
-                    _checkInTime = value;
-                  });
-                },
-              ),
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  value: _isFlexibleCheckedIn,
-                  onChanged: (newValue) {
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Check-in Time'),
+              SizedBox(
+                height: 200,
+                child: CupertinoTimerPicker(
+                  mode: CupertinoTimerPickerMode.hm,
+                  initialTimerDuration: _checkInTime,
+                  onTimerDurationChanged: (value) {
                     setState(() {
-                      _isFlexibleCheckedIn = newValue!;
+                      _checkInTime = value;
                     });
                   },
-                  activeColor: Colors.blue,
                 ),
-                const Text('Flexible with Check-in time'),
-              ],
-            ),
-            const SizedBox(height: 10),
-            const Text('Check-out Time'),
-            SizedBox(
-              height: 200,
-              child: CupertinoTimerPicker(
-                mode: CupertinoTimerPickerMode.hm,
-                initialTimerDuration: _checkOutTime,
-                onTimerDurationChanged: (value) {
-                  setState(() {
-                    _checkOutTime = value;
-                  });
-                },
               ),
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  value: _isFlexibleCheckedOut,
-                  onChanged: (newValue) {
+              Row(
+                children: [
+                  Checkbox(
+                    value: _isFlexibleCheckedIn,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _isFlexibleCheckedIn = newValue!;
+                      });
+                    },
+                    activeColor: Colors.blue,
+                  ),
+                  const Text('Flexible with Check-in time'),
+                ],
+              ),
+              const SizedBox(height: 10),
+              const Text('Check-out Time'),
+              SizedBox(
+                height: 200,
+                child: CupertinoTimerPicker(
+                  mode: CupertinoTimerPickerMode.hm,
+                  initialTimerDuration: _checkOutTime,
+                  onTimerDurationChanged: (value) {
                     setState(() {
-                      _isFlexibleCheckedOut = newValue!;
+                      _checkOutTime = value;
                     });
                   },
-                  activeColor: Colors.blue,
                 ),
-                const Text('Flexible with Check-out time'),
-              ],
-            ),
-            Expanded(
-              child: Align(
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    value: _isFlexibleCheckedOut,
+                    onChanged: (newValue) {
+                      setState(() {
+                        _isFlexibleCheckedOut = newValue!;
+                      });
+                    },
+                    activeColor: Colors.blue,
+                  ),
+                  const Text('Flexible with Check-out time'),
+                ],
+              ),
+              Align(
                 alignment: Alignment.bottomCenter,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -139,8 +139,8 @@ class _CheckInOutDetailsScreenState extends State<CheckInOutDetailsScreen> {
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

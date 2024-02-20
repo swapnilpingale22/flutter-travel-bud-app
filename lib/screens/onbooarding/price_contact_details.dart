@@ -21,6 +21,8 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _startPriceController = TextEditingController();
   final TextEditingController _endPriceController = TextEditingController();
+  final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +91,12 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
                                     if (val == null || val.isEmpty) {
                                       return 'Please enter start price';
                                     }
+                                    if (double.tryParse(val) == null) {
+                                      return 'Must contain only digits';
+                                    }
+                                    if (double.parse(val) == 0) {
+                                      return 'Price cannot be zero';
+                                    }
                                     return null;
                                   },
                                   controller: _startPriceController,
@@ -105,6 +113,12 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
                                   validator: (val) {
                                     if (val == null || val.isEmpty) {
                                       return 'Please enter end price';
+                                    }
+                                    if (double.tryParse(val) == null) {
+                                      return 'Must contain only digits';
+                                    }
+                                    if (double.parse(val) == 0) {
+                                      return 'Price cannot be zero';
                                     }
                                     return null;
                                   },
@@ -136,6 +150,13 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
                               if (val == null || val.isEmpty) {
                                 return 'Please enter your contact number';
                               }
+                              if (int.tryParse(val) == null) {
+                                return 'Mobile number must contain only digits';
+                              }
+                              if (val.length != 10) {
+                                return 'Mobile number must be 10 digits long';
+                              }
+
                               return null;
                             },
                             controller: _contactNoController,
@@ -154,6 +175,9 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
                             validator: (val) {
                               if (val == null || val.isEmpty) {
                                 return 'Please enter your email';
+                              }
+                              if (!emailRegex.hasMatch(val)) {
+                                return 'Please enter a valid email';
                               }
                               return null;
                             },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_bud/screens/home/home_screen.dart';
 import 'package:travel_bud/screens/login/sign_up_screen.dart';
 import 'package:travel_bud/screens/onbooarding/address.dart';
 import 'package:travel_bud/screens/onbooarding/accommodation_details.dart';
@@ -105,6 +106,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const TermAndConditionsScreen(),
+      );
+
+    case HomeScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const HomeScreen(),
       );
 
     default:

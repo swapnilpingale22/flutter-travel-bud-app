@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_chip.dart';
 import 'package:travel_bud/common_widgets/custom_icon_chip.dart';
@@ -12,6 +13,7 @@ class DetailsTabContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LatLng puneLocation = const LatLng(18.5204, 73.8567);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,16 +195,17 @@ class DetailsTabContent extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 10),
-        Container(
+        SizedBox(
           height: 240,
           width: double.infinity,
-          decoration: BoxDecoration(
+          child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            image: const DecorationImage(
-              image: AssetImage(
-                'assets/images/mapHorizontal.png',
+            child: GoogleMap(
+              mapType: MapType.normal,
+              initialCameraPosition: CameraPosition(
+                target: puneLocation,
+                zoom: 12,
               ),
-              fit: BoxFit.contain,
             ),
           ),
         ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
 import 'package:travel_bud/screens/login/login_screen.dart';
+import 'package:travel_bud/services/auth_services.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const String routeName = '/signup-screen';
@@ -14,6 +15,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final AuthService authService = AuthService();
   final _signUpFormKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _mobileNumberController = TextEditingController();
@@ -38,6 +40,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _confirmEmailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
+  }
+
+  void signUpUser() {
+    authService.signUpUser(
+      context: context,
+      name: _nameController.text,
+      mobileNo: int.parse(_mobileNumberController.text),
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
   }
 
   @override
@@ -96,12 +108,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 if (val == null || val.isEmpty) {
                                   return 'Mobile No cannot be blank';
                                 }
-                                if (val.length != 10) {
-                                  return 'Mobile number must be 10 digits long';
-                                }
                                 if (int.tryParse(val) == null) {
                                   return 'Mobile number must contain only digits';
                                 }
+                                if (val.length != 10) {
+                                  return 'Mobile number must be 10 digits long';
+                                }
+
                                 return null;
                               },
                             ),
@@ -225,7 +238,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     CustomButton(
                       text: 'Sign Up',
                       onTap: () {
-                        if (_signUpFormKey.currentState!.validate()) {}
+                        if (_signUpFormKey.currentState!.validate()) {
+                          signUpUser();
+                        }
                       },
                     ),
                     const SizedBox(height: 50),

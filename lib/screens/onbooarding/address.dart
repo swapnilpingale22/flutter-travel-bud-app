@@ -146,8 +146,11 @@ class _AddresssScreenState extends State<AddresssScreen> {
                                   if (val == null || val.isEmpty) {
                                     return 'Please enter your pincode';
                                   }
+                                  if (int.tryParse(val) == null) {
+                                    return 'Mobile number must contain only digits';
+                                  }
                                   if (val.length < 6) {
-                                    return 'Enter maximum 6 digit number';
+                                    return 'Enter minimum 6 digit number';
                                   }
 
                                   return null;

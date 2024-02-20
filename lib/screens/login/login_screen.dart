@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
 import 'package:travel_bud/screens/login/sign_up_screen.dart';
-import 'package:travel_bud/screens/onbooarding/homestay_title.dart';
+import 'package:travel_bud/services/auth_services.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = '/login-screen';
@@ -16,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthService authService = AuthService();
   final _signInFormKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -29,6 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
+  }
+
+  void signInUser() {
+    authService.signInUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
   }
 
   @override
@@ -157,10 +166,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: 'Login',
                   onTap: () {
                     if (_signInFormKey.currentState!.validate()) {
-                      Navigator.pushNamed(
-                        context,
-                        HomeStayTitle.routeName,
-                      );
+                      signInUser();
                     }
                   },
                 ),
