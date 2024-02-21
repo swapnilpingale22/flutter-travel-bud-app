@@ -11,7 +11,6 @@ authRouter.post("/api/signup", async (req, res) => {
     const { name, mobileNo, email, password } = req.body;
 
     const existingUSer = await User.findOne({ email });
-    console.log(name, mobileNo, email, password);
     if (existingUSer) {
       return res
         .status(400)
