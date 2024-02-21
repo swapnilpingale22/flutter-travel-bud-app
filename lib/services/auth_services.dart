@@ -8,8 +8,8 @@ import 'package:travel_bud/constants/error_handling.dart';
 import 'package:travel_bud/constants/utils.dart';
 import 'package:travel_bud/models/user.dart';
 import 'package:http/http.dart' as http;
+import 'package:travel_bud/screens/bottom_bar/bottom_bar.dart';
 import 'package:travel_bud/screens/login/login_screen.dart';
-import 'package:travel_bud/screens/onbooarding/homestay_title.dart';
 import 'package:travel_bud/secrets/secret.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,10 +34,9 @@ class AuthService {
         id: '',
         token: '',
       );
-
       http.Response res = await http.post(
         Uri.parse('$uri/api/signup'),
-        body: json.encode(user.toJson()),
+        body: user.toJson(),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -50,6 +49,11 @@ class AuthService {
             context,
             'Account created',
             Colors.green,
+          );
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            LoginScreen.routeName,
+            (route) => false,
           );
         },
       );
@@ -97,7 +101,7 @@ class AuthService {
 
           Navigator.pushNamedAndRemoveUntil(
             context,
-            HomeStayTitle.routeName,
+            BottomBar.routeName,
             (route) => false,
           );
         },

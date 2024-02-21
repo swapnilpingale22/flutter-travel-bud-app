@@ -5,7 +5,8 @@ const authRouter = require("./routes/auth");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
-const DBurl = "mongodb+srv://swapnil:Swapnil789@cluster0.bihocz1.mongodb.net/?retryWrites=true&w=majority"
+const DBurl =
+  "mongodb+srv://swapnil:Swapnil789@cluster0.bihocz1.mongodb.net/?retryWrites=true&w=majority";
 
 //for multi platform support eg. chrome
 app.use(cors());
