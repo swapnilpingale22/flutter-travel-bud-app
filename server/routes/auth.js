@@ -79,4 +79,8 @@ authRouter.get("/", auth, async (req, res) => {
   res.json({ ...user._doc, token: req.token });
 });
 
+//test route
+authRouter.get("/test", (req, res) => {
+  return res.json({ status: "ok" });
+});
 module.exports = authRouter;
