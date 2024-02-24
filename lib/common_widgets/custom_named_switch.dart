@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 
 class CustomNamedSwitch extends StatefulWidget {
   final String title;
+  final bool value;
+  final Function(bool)? onPressed;
   const CustomNamedSwitch({
     Key? key,
     required this.title,
+    required this.value,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -13,7 +17,6 @@ class CustomNamedSwitch extends StatefulWidget {
 }
 
 class _CustomNamedSwitchState extends State<CustomNamedSwitch> {
-  bool _value = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -38,12 +41,9 @@ class _CustomNamedSwitchState extends State<CustomNamedSwitch> {
             ),
             const SizedBox(width: 5),
             Switch(
-                value: _value,
-                onChanged: (val) {
-                  setState(() {
-                    _value = val;
-                  });
-                }),
+              value: widget.value,
+              onChanged: widget.onPressed,
+            ),
             const SizedBox(width: 5),
             const Text(
               'Yes',

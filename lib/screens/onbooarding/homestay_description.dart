@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
 import 'package:travel_bud/common_widgets/stepper.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
 import 'package:travel_bud/screens/onbooarding/price_contact_details.dart';
 
 class HomestayDescriptionScreen extends StatefulWidget {
@@ -36,6 +38,16 @@ class _HomestayDescriptionScreenState extends State<HomestayDescriptionScreen> {
       _isButtonEnabled = _descriptionController.text.isNotEmpty;
       _wordCount = _descriptionController.text.trim().length;
     });
+  }
+
+  void updateDescriptionProvider() {
+    var homestayProvider = Provider.of<HomestayProvider>(
+      context,
+      listen: false,
+    );
+    homestayProvider.updateDescription(
+      description: _descriptionController.text,
+    );
   }
 
   @override
@@ -117,6 +129,7 @@ class _HomestayDescriptionScreenState extends State<HomestayDescriptionScreen> {
                   text: 'Next',
                   onTap: _isButtonEnabled
                       ? () {
+                          updateDescriptionProvider();
                           Navigator.pushNamed(
                             context,
                             PriceContactDetailsScreen.routeName,

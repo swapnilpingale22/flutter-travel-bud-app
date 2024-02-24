@@ -1,13 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-// To parse this JSON data, do
-//
-//     final userModel = userModelFromJson(jsonString);
-
 import 'dart:convert';
-
-// UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
-
-// String userModelToJson(UserModel data) => json.encode(data.toJson());
 
 class UserModel {
   String name;
@@ -27,26 +18,6 @@ class UserModel {
     required this.id,
     required this.token,
   });
-
-  // factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-  //       name: json["name"],
-  //       mobileNo: json["mobileNo"],
-  //       email: json["email"],
-  //       password: json["password"],
-  //       type: json["type"],
-  //       id: json["_id"],
-  //       token: json["token"],
-  //     );
-
-  // Map<String, dynamic> toJson() => {
-  //       "name": name,
-  //       "mobileNo": mobileNo,
-  //       "email": email,
-  //       "password": password,
-  //       "type": type,
-  //       "_id": id,
-  //       "token": token,
-  //     };
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

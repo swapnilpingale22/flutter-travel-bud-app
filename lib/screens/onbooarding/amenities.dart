@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/confirm_dialog.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/stepper.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
 import 'package:travel_bud/screens/onbooarding/add_amenities.dart';
 import 'package:travel_bud/screens/onbooarding/check_in_out_details.dart';
 
@@ -23,6 +25,16 @@ class _AmenitiesScreenState extends State<AmenitiesScreen> {
           ? amenities.remove(amenity)
           : amenities.add(amenity);
     });
+  }
+
+  void updateAmenitiesProvider() {
+    var homestayProvider = Provider.of<HomestayProvider>(
+      context,
+      listen: false,
+    );
+    homestayProvider.updateAmenities(
+      amenitiesList: amenities,
+    );
   }
 
   @override
@@ -182,6 +194,7 @@ class _AmenitiesScreenState extends State<AmenitiesScreen> {
                       text: 'Next',
                       onTap: amenities.isNotEmpty
                           ? () {
+                              updateAmenitiesProvider();
                               Navigator.pushNamed(
                                 context,
                                 CheckInOutDetailsScreen.routeName,

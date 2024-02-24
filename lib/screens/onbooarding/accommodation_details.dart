@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/confirm_dialog.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_listtile.dart';
 import 'package:travel_bud/common_widgets/custom_named_switch.dart';
 import 'package:travel_bud/common_widgets/stepper.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
 import 'package:travel_bud/screens/onbooarding/amenities.dart';
 
 enum Place {
@@ -24,6 +26,30 @@ class AccommodationDetailsScreen extends StatefulWidget {
 class _AccommodationDetailsScreenState
     extends State<AccommodationDetailsScreen> {
   Place _place = Place.entirePlace;
+  int maxGuests = 0;
+  int bedrooms = 0;
+  int singleBed = 0;
+  int doubleBed = 0;
+  int extraFloorMat = 0;
+  int bathrooms = 0;
+  bool isKitchenAvailable = false;
+
+  void updateAccomDetailsProvider() {
+    var homestayProvider = Provider.of<HomestayProvider>(
+      context,
+      listen: false,
+    );
+    homestayProvider.updateAccomDetails(
+      area: _place.name,
+      guests: maxGuests,
+      bedroom: bedrooms,
+      singleBed: singleBed,
+      doubleBed: doubleBed,
+      extraFloorMat: extraFloorMat,
+      bathroom: bathrooms,
+      kitchen: isKitchenAvailable,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -155,32 +181,98 @@ class _AccommodationDetailsScreenState
                       ),
                     ),
                   ),
-                  const CustomListTile(
+                  CustomListTile(
                     title: 'Max Guests',
-                    count: 12,
+                    count: maxGuests,
+                    onIncrease: () {
+                      setState(() {
+                        maxGuests = maxGuests + 1;
+                      });
+                    },
+                    onDecrease: () {
+                      setState(() {
+                        maxGuests = maxGuests - 1;
+                      });
+                    },
                   ),
-                  const CustomListTile(
+                  CustomListTile(
                     title: 'Bedrooms',
-                    count: 06,
+                    count: bedrooms,
+                    onIncrease: () {
+                      setState(() {
+                        bedrooms = bedrooms + 1;
+                      });
+                    },
+                    onDecrease: () {
+                      setState(() {
+                        bedrooms = bedrooms - 1;
+                      });
+                    },
                   ),
-                  const CustomListTile(
+                  CustomListTile(
                     title: 'Single Bed',
-                    count: 05,
+                    count: singleBed,
+                    onIncrease: () {
+                      setState(() {
+                        singleBed = singleBed + 1;
+                      });
+                    },
+                    onDecrease: () {
+                      setState(() {
+                        singleBed = singleBed - 1;
+                      });
+                    },
                   ),
-                  const CustomListTile(
+                  CustomListTile(
                     title: 'Double Bed',
-                    count: 06,
+                    count: doubleBed,
+                    onIncrease: () {
+                      setState(() {
+                        doubleBed = doubleBed + 1;
+                      });
+                    },
+                    onDecrease: () {
+                      setState(() {
+                        doubleBed = doubleBed - 1;
+                      });
+                    },
                   ),
-                  const CustomListTile(
+                  CustomListTile(
                     title: 'Extra floor mattress',
-                    count: 02,
+                    count: extraFloorMat,
+                    onIncrease: () {
+                      setState(() {
+                        extraFloorMat = extraFloorMat + 1;
+                      });
+                    },
+                    onDecrease: () {
+                      setState(() {
+                        extraFloorMat = extraFloorMat - 1;
+                      });
+                    },
                   ),
-                  const CustomListTile(
+                  CustomListTile(
                     title: 'Bathrooms',
-                    count: 06,
+                    count: bathrooms,
+                    onIncrease: () {
+                      setState(() {
+                        bathrooms = bathrooms + 1;
+                      });
+                    },
+                    onDecrease: () {
+                      setState(() {
+                        bathrooms = bathrooms - 1;
+                      });
+                    },
                   ),
-                  const CustomNamedSwitch(
+                  CustomNamedSwitch(
                     title: 'Kitchen Avaible',
+                    value: isKitchenAvailable,
+                    onPressed: (val) {
+                      setState(() {
+                        isKitchenAvailable = val;
+                      });
+                    },
                   ),
                   const SizedBox(height: 110),
                 ],
@@ -194,6 +286,7 @@ class _AccommodationDetailsScreenState
                   CustomButton(
                     text: 'Next',
                     onTap: () {
+                      updateAccomDetailsProvider();
                       Navigator.pushNamed(
                         context,
                         AmenitiesScreen.routeName,

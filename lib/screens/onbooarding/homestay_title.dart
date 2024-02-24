@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
 import 'package:travel_bud/common_widgets/stepper.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
 import 'package:travel_bud/screens/onbooarding/homestay_type.dart';
 
 class HomeStayTitle extends StatefulWidget {
@@ -116,6 +118,12 @@ class _HomeStayTitleState extends State<HomeStayTitle> {
                   text: 'Next',
                   onTap: _isButtonEnabled
                       ? () {
+                          var homestayProvider = Provider.of<HomestayProvider>(
+                            context,
+                            listen: false,
+                          );
+                          homestayProvider
+                              .updateHomestayTitle(_titleController.text);
                           Navigator.pushNamed(
                             context,
                             HomestayTypeScreen.routeName,

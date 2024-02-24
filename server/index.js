@@ -4,7 +4,7 @@ const cors = require("cors");
 const authRouter = require("./routes/auth");
 require("dotenv").config();
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const app = express();
 const mongoDBUrl = process.env.MONGODB_URL;
 

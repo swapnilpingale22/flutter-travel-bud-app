@@ -149,6 +149,7 @@ class _TermAndConditionsScreenState extends State<TermAndConditionsScreen> {
                 text: 'Done',
                 onTap: _isChecked
                     ? () {
+                        // method to upload homestay data to db
                         showCongratulationsDialog(context);
                       }
                     : null,

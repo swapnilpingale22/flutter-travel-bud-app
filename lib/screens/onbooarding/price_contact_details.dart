@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/custom_amenity.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
 import 'package:travel_bud/common_widgets/stepper.dart';
-import 'package:travel_bud/screens/onbooarding/preview.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
+import 'package:travel_bud/screens/onbooarding/homestay_preview.dart';
 
 class PriceContactDetailsScreen extends StatefulWidget {
   static const String routeName = '/price-contact-details';
@@ -22,6 +24,21 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
   final TextEditingController _startPriceController = TextEditingController();
   final TextEditingController _endPriceController = TextEditingController();
   final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+
+  void updatePriceContactProvider() {
+    var homestayProvider = Provider.of<HomestayProvider>(
+      context,
+      listen: false,
+    );
+    homestayProvider.updatePriceContact(
+      startPrice: double.parse(_startPriceController.text),
+      endPrice: double.parse(_endPriceController.text),
+      ownerContactNo: int.parse(_contactNoController.text),
+      ownerEmail: _emailController.text,
+      homestayContactNo: int.parse(_contactNoController.text),
+      homestayEmail: _emailController.text,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -239,9 +256,10 @@ class _PriceContactDetailsScreenState extends State<PriceContactDetailsScreen> {
                 text: 'Done',
                 onTap: () {
                   if (_contactDetailsFormKey.currentState!.validate()) {
+                    updatePriceContactProvider();
                     Navigator.pushNamed(
                       context,
-                      PreviewScreen.routeName,
+                      HomestayPreviewScreen.routeName,
                     );
                   }
                 },

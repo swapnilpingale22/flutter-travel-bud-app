@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/stepper.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
 import 'package:travel_bud/screens/onbooarding/address.dart';
 import 'package:travel_bud/common_widgets/confirm_dialog.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
@@ -16,7 +18,9 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
-  LatLng puneLocation = const LatLng(18.5204, 73.8567);
+  double latitude = 18.5304;
+  double longitude = 73.8567;
+  // LatLng puneLocation = const LatLng(18.5204, 73.8567);
   @override
   void initState() {
     super.initState();
@@ -27,6 +31,17 @@ class _LocationScreenState extends State<LocationScreen> {
     Timer(const Duration(seconds: 2), () {
       showLocationDialog(context);
     });
+  }
+
+  void updateLocationProvider() {
+    var homestayProvider = Provider.of<HomestayProvider>(
+      context,
+      listen: false,
+    );
+    homestayProvider.updateLocation(
+      lat: latitude,
+      long: longitude,
+    );
   }
 
   @override
@@ -72,7 +87,7 @@ class _LocationScreenState extends State<LocationScreen> {
         children: [
           GoogleMap(
             initialCameraPosition: CameraPosition(
-              target: puneLocation,
+              target: LatLng(latitude, longitude),
               zoom: 12,
             ),
             mapType: MapType.hybrid,
@@ -107,6 +122,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   CustomButton(
                     text: 'Next',
                     onTap: () {
+                      updateLocationProvider();
                       Navigator.pushNamed(
                         context,
                         AddresssScreen.routeName,

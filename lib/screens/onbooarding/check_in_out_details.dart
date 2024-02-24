@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/stepper.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
 import 'package:travel_bud/screens/onbooarding/location.dart';
 
 class CheckInOutDetailsScreen extends StatefulWidget {
@@ -18,6 +20,19 @@ class _CheckInOutDetailsScreenState extends State<CheckInOutDetailsScreen> {
   Duration _checkOutTime = const Duration(hours: 07, minutes: 08);
   bool _isFlexibleCheckedIn = false;
   bool _isFlexibleCheckedOut = true;
+
+  void updatecheckInOutProvider() {
+    var homestayProvider = Provider.of<HomestayProvider>(
+      context,
+      listen: false,
+    );
+    homestayProvider.updateCheckInOut(
+      checkIn: _checkInTime,
+      checkOut: _checkOutTime,
+      isCheckInFlexi: _isFlexibleCheckedIn,
+      isCheckOutFlexi: _isFlexibleCheckedOut,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +143,7 @@ class _CheckInOutDetailsScreenState extends State<CheckInOutDetailsScreen> {
                       text: 'Next',
                       onTap: _checkInTime != _checkOutTime
                           ? () {
+                              updatecheckInOutProvider();
                               Navigator.pushNamed(
                                 context,
                                 LocationScreen.routeName,

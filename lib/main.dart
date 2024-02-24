@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
 import 'package:travel_bud/provider/user_provider.dart';
 import 'package:travel_bud/router.dart';
 import 'package:travel_bud/screens/bottom_bar/bottom_bar.dart';
@@ -13,6 +14,9 @@ void main() {
       providers: [
         ChangeNotifierProvider(
           create: (context) => UserProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomestayProvider(),
         )
       ],
       child: const MyApp(),

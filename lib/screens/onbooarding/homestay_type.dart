@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_tile.dart';
 import 'package:travel_bud/common_widgets/stepper.dart';
 import 'package:travel_bud/constants/global_varialbles.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
 import 'package:travel_bud/screens/onbooarding/accommodation_details.dart';
 
 class HomestayTypeScreen extends StatefulWidget {
@@ -96,6 +98,11 @@ class _HomestayTypeScreenState extends State<HomestayTypeScreen> {
                   text: 'Next',
                   onTap: _isButtonEnabled
                       ? () {
+                          var homestayProvider = Provider.of<HomestayProvider>(
+                            context,
+                            listen: false,
+                          );
+                          homestayProvider.updateHomestayType(selectedItem);
                           Navigator.pushNamed(
                             context,
                             AccommodationDetailsScreen.routeName,

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_switch.dart';
 import 'package:travel_bud/common_widgets/custom_text_field_title.dart';
 import 'package:travel_bud/common_widgets/custom_textfield.dart';
 import 'package:travel_bud/common_widgets/drop_down.dart';
 import 'package:travel_bud/common_widgets/stepper.dart';
+import 'package:travel_bud/constants/global_varialbles.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
 import 'package:travel_bud/screens/onbooarding/photos.dart';
 
 class AddresssScreen extends StatefulWidget {
@@ -24,7 +27,8 @@ class _AddresssScreenState extends State<AddresssScreen> {
   final TextEditingController _landmarkController = TextEditingController();
   final TextEditingController _cityTownController = TextEditingController();
   final TextEditingController _pincodeController = TextEditingController();
-
+  bool isLocationSpecific = false;
+  String selectedState = 'Select your state';
   @override
   void dispose() {
     super.dispose();
@@ -33,6 +37,22 @@ class _AddresssScreenState extends State<AddresssScreen> {
     _landmarkController.dispose();
     _cityTownController.dispose();
     _pincodeController.dispose();
+  }
+
+  void updateAddressProvider() {
+    var homestayProvider = Provider.of<HomestayProvider>(
+      context,
+      listen: false,
+    );
+    homestayProvider.updateAddress(
+      address: _addressController.text,
+      streetAddress: _streetAddressController.text,
+      landmark: _landmarkController.text,
+      city: _cityTownController.text,
+      pincode: int.parse(_pincodeController.text),
+      state: selectedState,
+      islocationSpecif: isLocationSpecific,
+    );
   }
 
   @override
@@ -163,9 +183,23 @@ class _AddresssScreenState extends State<AddresssScreen> {
                               const CustomTextFieldTitle(
                                 title: 'State',
                               ),
-                              const StateDropdown(),
-                              const CustomSwitch(
+                              StateDropdown(
+                                selectedState: selectedState,
+                                statesList: GlobalVariables.statesList,
+                                onPressed: (val) {
+                                  setState(() {
+                                    selectedState = val!;
+                                  });
+                                },
+                              ),
+                              CustomSwitch(
                                 title: 'Show your specific location',
+                                value: isLocationSpecific,
+                                onPressed: (val) {
+                                  setState(() {
+                                    isLocationSpecific = val;
+                                  });
+                                },
                               ),
                             ],
                           ),
@@ -183,6 +217,7 @@ class _AddresssScreenState extends State<AddresssScreen> {
                 text: 'Next',
                 onTap: () {
                   if (_addressFormKey.currentState!.validate()) {
+                    updateAddressProvider();
                     Navigator.pushNamed(
                       context,
                       PhotosScreen.routeName,
