@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travel_bud/common_widgets/confirm_dialog.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
+import 'package:travel_bud/services/host_property_services.dart';
 
 class TermAndConditionsScreen extends StatefulWidget {
   static const String routeName = '/term-and-conditions';
@@ -13,6 +13,7 @@ class TermAndConditionsScreen extends StatefulWidget {
 }
 
 class _TermAndConditionsScreenState extends State<TermAndConditionsScreen> {
+  HostPropertyServices hps = HostPropertyServices();
   bool _isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -149,8 +150,7 @@ class _TermAndConditionsScreenState extends State<TermAndConditionsScreen> {
                 text: 'Done',
                 onTap: _isChecked
                     ? () {
-                        // method to upload homestay data to db
-                        showCongratulationsDialog(context);
+                        hps.hostProperty(context: context);
                       }
                     : null,
               ),

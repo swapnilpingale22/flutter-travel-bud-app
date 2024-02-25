@@ -13,7 +13,7 @@ class HomestayProvider extends ChangeNotifier {
     singleBed: 0,
     doubleBed: 0,
     extraFloorMat: 0,
-    bathroms: 0,
+    bathrooms: 0,
     isKitchen: false,
     amenities: [],
     checkInTime: const Duration(hours: 00, minutes: 00),
@@ -70,7 +70,7 @@ class HomestayProvider extends ChangeNotifier {
     homestay.singleBed = singleBed;
     homestay.doubleBed = doubleBed;
     homestay.extraFloorMat = extraFloorMat;
-    homestay.bathroms = bathroom;
+    homestay.bathrooms = bathroom;
     homestay.isKitchen = kitchen;
     notifyListeners();
   }

@@ -67,7 +67,7 @@ class DetailsTabContent2 extends StatelessWidget {
             ),
             CustomNumberedChip(
               path: 'assets/images/bathroom.svg',
-              count: homestay.bathroms.toString(),
+              count: homestay.bathrooms.toString(),
               title: 'Bathrooms',
             ),
             CustomNumberedChip(

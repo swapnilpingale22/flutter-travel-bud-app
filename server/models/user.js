@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { homestaySchema } = require("./homestay");
 
 const userSchema = mongoose.Schema({
   name: {
@@ -44,6 +45,11 @@ const userSchema = mongoose.Schema({
     default: "user",
   },
   //homestay data
+  homestays: [
+    {
+      homestay: homestaySchema,
+    },
+  ],
 });
 
 const User = mongoose.model("User", userSchema);

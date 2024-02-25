@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_bud/provider/user_provider.dart';
 import 'package:travel_bud/screens/home/home_screen.dart';
+import 'package:travel_bud/screens/onbooarding/homestay_title.dart';
 import 'package:travel_bud/screens/profile/profile_screen.dart';
 import 'package:travel_bud/screens/host/host_screen.dart';
 
@@ -101,6 +102,17 @@ class _BottomBarState extends State<BottomBar> {
           ],
         ),
       ),
+      floatingActionButton: _selectedIndex == 1
+          ? FloatingActionButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  HomeStayTitle.routeName,
+                );
+              },
+              child: const Icon(Icons.add),
+            )
+          : null,
     );
   }
 }

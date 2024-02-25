@@ -10,9 +10,9 @@ class HomestayModel {
   int singleBed;
   int doubleBed;
   int extraFloorMat;
-  int bathroms;
+  int bathrooms;
   bool isKitchen;
-  List<String> amenities;
+  List<dynamic> amenities;
   Duration checkInTime;
   Duration checkOutTime;
   bool isCheckInFlexible;
@@ -26,7 +26,7 @@ class HomestayModel {
   int pincode;
   String state;
   bool isLocationSpecific;
-  List<String> photos;
+  List<dynamic> photos;
   String description;
   double startPrice;
   double endPrice;
@@ -34,8 +34,8 @@ class HomestayModel {
   String ownerEmail;
   int homestayContactNo;
   String homestayEmail;
-  final String? id;
-  final String? userId;
+  String? id;
+  String userId;
 
   HomestayModel({
     required this.title,
@@ -46,7 +46,7 @@ class HomestayModel {
     required this.singleBed,
     required this.doubleBed,
     required this.extraFloorMat,
-    required this.bathroms,
+    required this.bathrooms,
     required this.isKitchen,
     required this.amenities,
     required this.checkInTime,
@@ -70,7 +70,7 @@ class HomestayModel {
     required this.ownerEmail,
     required this.homestayContactNo,
     required this.homestayEmail,
-    required this.id,
+    this.id,
     required this.userId,
   });
 
@@ -84,7 +84,7 @@ class HomestayModel {
       'singleBed': singleBed,
       'doubleBed': doubleBed,
       'extraFloorMat': extraFloorMat,
-      'bathroms': bathroms,
+      'bathrooms': bathrooms,
       'isKitchen': isKitchen,
       'amenities': amenities,
       'checkInTime': {
@@ -114,7 +114,7 @@ class HomestayModel {
       'ownerEmail': ownerEmail,
       'homestayContactNo': homestayContactNo,
       'homestayEmail': homestayEmail,
-      '_id': id,
+      'id': id,
       'userId': userId,
     };
   }
@@ -129,9 +129,9 @@ class HomestayModel {
       singleBed: map['singleBed'] as int,
       doubleBed: map['doubleBed'] as int,
       extraFloorMat: map['extraFloorMat'] as int,
-      bathroms: map['bathroms'] as int,
+      bathrooms: map['bathrooms'] as int,
       isKitchen: map['isKitchen'] as bool,
-      amenities: List<String>.from((map['amenities'] as List<String>)),
+      amenities: List<String>.from((map['amenities'] as List<dynamic>)),
       checkInTime: Duration(
         hours: map['checkInTime']['hours'],
         minutes: map['checkInTime']['minutes'],
@@ -151,16 +151,16 @@ class HomestayModel {
       pincode: map['pincode'] as int,
       state: map['state'] as String,
       isLocationSpecific: map['isLocationSpecific'] as bool,
-      photos: List<String>.from((map['photos'] as List<String>)),
+      photos: List<String>.from((map['photos'] as List<dynamic>)),
       description: map['description'] as String,
-      startPrice: map['startPrice'] as double,
-      endPrice: map['endPrice'] as double,
+      startPrice: (map['startPrice'] ?? 0).toDouble(),
+      endPrice: (map['endPrice'] ?? 0).toDouble(),
       ownerContactNo: map['ownerContactNo'] as int,
       ownerEmail: map['ownerEmail'] as String,
       homestayContactNo: map['homestayContactNo'] as int,
       homestayEmail: map['homestayEmail'] as String,
       id: map['_id'] as String,
-      userId: map['userID'] as String,
+      userId: map['userId'] as String,
     );
   }
 

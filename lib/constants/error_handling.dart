@@ -34,7 +34,7 @@ void httpErrorHandle({
       showSnackbar(
         context,
         response.body,
-        Colors.tealAccent,
+        const Color.fromARGB(255, 6, 110, 86),
       );
   }
 }
