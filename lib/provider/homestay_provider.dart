@@ -30,6 +30,7 @@ class HomestayProvider extends ChangeNotifier {
     state: '',
     isLocationSpecific: false,
     photos: [],
+    coverPhoto: '',
     description: '',
     startPrice: 0,
     endPrice: 0,
@@ -128,6 +129,13 @@ class HomestayProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateCoverPhoto({
+    required String coverPhoto,
+  }) {
+    homestay.coverPhoto = coverPhoto;
+    notifyListeners();
+  }
+
   void updateDescription({
     required String description,
   }) {
@@ -152,10 +160,25 @@ class HomestayProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Method to submit homestay details to the backend
-  Future<void> submitHomestayToBackend() async {
-    // Call your backend API here to submit _homestay
-    // Example:
-    // await ApiService.submitHomestay(_homestay.toJson());
+  final List<HomestayModel> _properties = [];
+
+  List<HomestayModel> get properties => _properties;
+
+  void addPropertiesToProvider(List<HomestayModel> item) {
+    for (int i = 0; i < item.length; i++) {
+      properties.add(
+        item[i],
+      );
+    }
+    notifyListeners();
+  }
+
+  bool _dataFetched = false;
+
+  bool get dataFetched => _dataFetched;
+
+  Future<void> fetchData() async {
+    _dataFetched = true;
+    notifyListeners();
   }
 }

@@ -1,14 +1,20 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
-import 'package:travel_bud/screens/onbooarding/term_and_conditions.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
 
 class ContactsTabContent extends StatelessWidget {
+  final int index;
   const ContactsTabContent({
-    super.key,
-  });
+    Key? key,
+    required this.index,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var property =
+        Provider.of<HomestayProvider>(context, listen: false).properties[index];
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,29 +28,29 @@ class ContactsTabContent extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        const Row(
+        Row(
           children: [
-            Icon(
+            const Icon(
               Icons.call,
               color: Colors.blue,
             ),
             Text(
-              ' +1 56445 54876',
-              style: TextStyle(
+              ' ${property.ownerContactNo}',
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
           ],
         ),
-        const Row(
+        Row(
           children: [
-            Icon(
+            const Icon(
               Icons.mail_outline,
               color: Colors.blue,
             ),
             Text(
-              ' johndoe0601@gmail.com',
-              style: TextStyle(
+              ' ${property.ownerEmail}',
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
@@ -59,58 +65,30 @@ class ContactsTabContent extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 10),
-        const Row(
+        Row(
           children: [
-            Icon(
+            const Icon(
               Icons.call,
               color: Colors.blue,
             ),
             Text(
-              ' +1 56445 54876',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
-        const Row(
-          children: [
-            Icon(
-              Icons.call,
-              color: Colors.blue,
-            ),
-            Text(
-              ' +1 87564 23847',
-              style: TextStyle(
+              ' ${property.homestayContactNo}',
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
           ],
         ),
         const SizedBox(height: 10),
-        const Row(
+        Row(
           children: [
-            Icon(
+            const Icon(
               Icons.mail_outline,
               color: Colors.blue,
             ),
             Text(
-              ' johndoe0601@gmail.com',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ],
-        ),
-        const Row(
-          children: [
-            Icon(
-              Icons.mail_outline,
-              color: Colors.blue,
-            ),
-            Text(
-              ' jeonzjk0601@gmail.com',
-              style: TextStyle(
+              ' ${property.homestayEmail}',
+              style: const TextStyle(
                 fontSize: 16,
               ),
             ),
@@ -120,10 +98,7 @@ class ContactsTabContent extends StatelessWidget {
         CustomButton(
           text: 'Done',
           onTap: () {
-            Navigator.pushNamed(
-              context,
-              TermAndConditionsScreen.routeName,
-            );
+            Navigator.pop(context);
           },
         ),
       ],

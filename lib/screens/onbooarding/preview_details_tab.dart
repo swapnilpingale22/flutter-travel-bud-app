@@ -8,8 +8,8 @@ import 'package:travel_bud/common_widgets/custom_numbered_chip.dart';
 import 'package:travel_bud/provider/homestay_provider.dart';
 import 'package:travel_bud/screens/onbooarding/term_and_conditions.dart';
 
-class DetailsTabContent2 extends StatelessWidget {
-  const DetailsTabContent2({
+class PreviewDetailsTabContent extends StatelessWidget {
+  const PreviewDetailsTabContent({
     super.key,
   });
 
@@ -215,10 +215,17 @@ class DetailsTabContent2 extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             child: GoogleMap(
               mapType: MapType.normal,
+              liteModeEnabled: true,
               initialCameraPosition: CameraPosition(
                 target: LatLng(homestay.latitude, homestay.longitude),
-                zoom: 12,
+                zoom: 13,
               ),
+              markers: {
+                Marker(
+                  markerId: const MarkerId('id'),
+                  position: LatLng(homestay.latitude, homestay.longitude),
+                )
+              },
             ),
           ),
         ),

@@ -31,6 +31,7 @@ homestayRouter.post("/host-property", auth, async (req, res) => {
       pincode,
       state,
       isLocationSpecific,
+      coverPhoto,
       photos,
       description,
       startPrice,
@@ -67,6 +68,7 @@ homestayRouter.post("/host-property", auth, async (req, res) => {
       pincode,
       state,
       isLocationSpecific,
+      coverPhoto,
       photos,
       description,
       startPrice,
@@ -115,7 +117,6 @@ homestayRouter.post("/delete-property", auth, async (req, res) => {
   try {
     const { id } = req.body;
     let property = await HomestayModel.findByIdAndDelete(id);
-    // property = await property.save();
     res.json(property);
   } catch (e) {
     res.status(500).json({ error: e.message });

@@ -56,6 +56,46 @@ class HostPropertyServices {
     return imageUrls;
   }
 
+  //upload cover image
+  Future<String?> uploadCoverImage({
+    required File image,
+    required BuildContext context,
+  }) async {
+    final homestay = Provider.of<HomestayProvider>(
+      context,
+      listen: false,
+    ).homestay;
+    try {
+      final cloudinary = CloudinaryPublic(
+        'dwl8x7x78',
+        'wzimubcf',
+        cache: false,
+      );
+      CloudinaryResponse res = await cloudinary.uploadFile(
+        CloudinaryFile.fromFile(
+          image.path,
+          folder: homestay.title,
+        ),
+      );
+
+      showSnackbar(
+        context,
+        'Cover Photo uploaded',
+        Colors.lightBlue,
+      );
+
+      return res.secureUrl;
+    } catch (e) {
+      showSnackbar(
+        context,
+        e.toString(),
+        Colors.red,
+      );
+
+      return null;
+    }
+  }
+
 //host a property
   void hostProperty({
     required BuildContext context,
@@ -89,6 +129,7 @@ class HostPropertyServices {
         state: hs.state,
         isLocationSpecific: hs.isLocationSpecific,
         photos: hs.photos,
+        coverPhoto: hs.coverPhoto,
         description: hs.description,
         startPrice: hs.startPrice,
         endPrice: hs.endPrice,

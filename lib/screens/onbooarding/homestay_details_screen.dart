@@ -1,20 +1,24 @@
+// class HomestayDetailsScreen extends StatefulWidget {
+//   static const String routeName = '/homestay-details';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/custom_cliprrect.dart';
 import 'package:travel_bud/provider/homestay_provider.dart';
-import 'package:travel_bud/screens/onbooarding/preview_contacts_tab.dart';
-import 'package:travel_bud/screens/onbooarding/preview_details_tab.dart';
+import 'package:travel_bud/screens/onbooarding/contacts_tab.dart';
+import 'package:travel_bud/screens/onbooarding/details_tab.dart';
 
-class HomestayPreviewScreen extends StatefulWidget {
-  static const String routeName = '/homestay-preview';
+class HomestayDetailsScreen extends StatefulWidget {
+  static const String routeName = '/homestay-details';
+  final int index;
 
-  const HomestayPreviewScreen({Key? key}) : super(key: key);
+  const HomestayDetailsScreen({Key? key, required this.index})
+      : super(key: key);
 
   @override
-  State<HomestayPreviewScreen> createState() => _HomestayPreviewScreenState();
+  State<HomestayDetailsScreen> createState() => _HomestayDetailsScreenState();
 }
 
-class _HomestayPreviewScreenState extends State<HomestayPreviewScreen>
+class _HomestayDetailsScreenState extends State<HomestayDetailsScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
@@ -32,8 +36,8 @@ class _HomestayPreviewScreenState extends State<HomestayPreviewScreen>
 
   @override
   Widget build(BuildContext context) {
-    var homestay =
-        Provider.of<HomestayProvider>(context, listen: false).homestay;
+    var property = Provider.of<HomestayProvider>(context, listen: false)
+        .properties[widget.index];
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -82,7 +86,7 @@ class _HomestayPreviewScreenState extends State<HomestayPreviewScreen>
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image.network(
-                      homestay.coverPhoto,
+                      property.coverPhoto,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -95,10 +99,10 @@ class _HomestayPreviewScreenState extends State<HomestayPreviewScreen>
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          CustomClipRRect(photoUrl: homestay.photos[1]),
-                          CustomClipRRect(photoUrl: homestay.photos[2]),
-                          CustomClipRRect(photoUrl: homestay.photos[3]),
-                          CustomClipRRect(photoUrl: homestay.photos[4]),
+                          CustomClipRRect(photoUrl: property.photos[1]),
+                          CustomClipRRect(photoUrl: property.photos[2]),
+                          CustomClipRRect(photoUrl: property.photos[3]),
+                          CustomClipRRect(photoUrl: property.photos[4]),
                         ],
                       ),
                     ),
@@ -114,21 +118,21 @@ class _HomestayPreviewScreenState extends State<HomestayPreviewScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      homestay.title,
+                      property.title,
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 28,
                       ),
                     ),
                     Text(
-                      '${homestay.address}, ${homestay.city}',
+                      '${property.address}, ${property.city}',
                       style: const TextStyle(
                         color: Colors.black38,
                       ),
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      '\$${homestay.startPrice} - \$${homestay.endPrice}',
+                      '\$${property.startPrice} - \$${property.endPrice}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -150,12 +154,12 @@ class _HomestayPreviewScreenState extends State<HomestayPreviewScreen>
                       ),
                     ),
                     SizedBox(
-                      height: 950,
+                      height: 1000,
                       child: TabBarView(
                         controller: _tabController,
-                        children: const [
-                          PreviewDetailsTabContent(),
-                          PreviewContactsTabContent(),
+                        children: [
+                          DetailsTabContent(index: widget.index),
+                          ContactsTabContent(index: widget.index)
                         ],
                       ),
                     ),

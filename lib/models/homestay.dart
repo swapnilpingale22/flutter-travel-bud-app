@@ -26,6 +26,7 @@ class HomestayModel {
   int pincode;
   String state;
   bool isLocationSpecific;
+  String coverPhoto;
   List<dynamic> photos;
   String description;
   double startPrice;
@@ -63,6 +64,7 @@ class HomestayModel {
     required this.state,
     required this.isLocationSpecific,
     required this.photos,
+    required this.coverPhoto,
     required this.description,
     required this.startPrice,
     required this.endPrice,
@@ -107,6 +109,7 @@ class HomestayModel {
       'state': state,
       'isLocationSpecific': isLocationSpecific,
       'photos': photos,
+      'coverPhoto': coverPhoto,
       'description': description,
       'startPrice': startPrice,
       'endPrice': endPrice,
@@ -152,6 +155,9 @@ class HomestayModel {
       state: map['state'] as String,
       isLocationSpecific: map['isLocationSpecific'] as bool,
       photos: List<String>.from((map['photos'] as List<dynamic>)),
+      coverPhoto: (map['coverPhoto'] == null)
+          ? 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW50ZXJpb3IlMjBkZXNpZ258ZW58MHx8MHx8fDA%3D'
+          : map['coverPhoto'] as String,
       description: map['description'] as String,
       startPrice: (map['startPrice'] ?? 0).toDouble(),
       endPrice: (map['endPrice'] ?? 0).toDouble(),

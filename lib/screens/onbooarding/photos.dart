@@ -24,6 +24,7 @@ class _PhotosScreenState extends State<PhotosScreen> {
   HostPropertyServices hps = HostPropertyServices();
 
   List<String> imageUrls = [];
+  String coverImageUrl = '';
   List<File> images = [];
   File? coverImage;
 
@@ -58,6 +59,22 @@ class _PhotosScreenState extends State<PhotosScreen> {
         listen: false,
       ).updatePhotos(
         photosList: imageUrls,
+      );
+    }
+
+    String? url = await hps.uploadCoverImage(
+      image: coverImage!,
+      context: context,
+    );
+    if (url != null) {
+      setState(() {
+        coverImageUrl = url;
+      });
+      Provider.of<HomestayProvider>(
+        context,
+        listen: false,
+      ).updateCoverPhoto(
+        coverPhoto: coverImageUrl,
       );
     }
   }

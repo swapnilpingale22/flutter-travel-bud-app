@@ -22,7 +22,7 @@ Future<List<File>> pickImages() async {
   try {
     FilePickerResult? files = await FilePicker.platform.pickFiles(
       type: FileType.image,
-      allowMultiple: true, 
+      allowMultiple: true,
     );
     if (files != null && files.files.isNotEmpty) {
       for (int i = 0; i < files.files.length; i++) {

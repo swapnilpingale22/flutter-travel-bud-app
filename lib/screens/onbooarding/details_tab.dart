@@ -1,32 +1,39 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/common_widgets/custom_chip.dart';
 import 'package:travel_bud/common_widgets/custom_icon_chip.dart';
 import 'package:travel_bud/common_widgets/custom_numbered_chip.dart';
-import 'package:travel_bud/screens/onbooarding/term_and_conditions.dart';
+import 'package:travel_bud/provider/homestay_provider.dart';
 
 class DetailsTabContent extends StatelessWidget {
+  final int index;
   const DetailsTabContent({
-    super.key,
-  });
+    Key? key,
+    required this.index,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    LatLng puneLocation = const LatLng(18.5204, 73.8567);
+    var property =
+        Provider.of<HomestayProvider>(context, listen: false).properties[index];
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 10),
-        const Row(
+        Row(
           children: [
             CustomChip(
-              text: 'Traditional',
+              text: property.homestayType,
               path: 'assets/images/traditional.svg',
             ),
             CustomChip(
-              text: 'Entire Place',
+              text: (property.area == 'entirePlace')
+                  ? "Entire Place"
+                  : "Private Room",
               path: 'assets/images/traditional.svg',
             ),
           ],
@@ -39,35 +46,35 @@ class DetailsTabContent extends StatelessWidget {
             crossAxisCount: 2,
             mainAxisExtent: 30,
           ),
-          children: const [
+          children: [
             CustomNumberedChip(
               path: 'assets/images/privateRoom.svg',
-              count: '6',
+              count: property.bedrooms.toString(),
               title: 'Bedrooms',
             ),
             CustomNumberedChip(
               path: 'assets/images/singleBed.svg',
-              count: '5',
+              count: property.singleBed.toString(),
               title: 'Single Bed',
             ),
             CustomNumberedChip(
               path: 'assets/images/doubleBed.svg',
-              count: '6',
+              count: property.doubleBed.toString(),
               title: 'Double Bed',
             ),
             CustomNumberedChip(
               path: 'assets/images/mattress.svg',
-              count: '2',
+              count: property.extraFloorMat.toString(),
               title: 'Floor mattress',
             ),
             CustomNumberedChip(
               path: 'assets/images/bathroom.svg',
-              count: '6',
+              count: property.bathrooms.toString(),
               title: 'Bathrooms',
             ),
             CustomNumberedChip(
               path: 'assets/images/guests.svg',
-              count: '12',
+              count: property.maxGuests.toString(),
               title: 'Guests',
             ),
           ],
@@ -80,8 +87,8 @@ class DetailsTabContent extends StatelessWidget {
             fontSize: 18,
           ),
         ),
-        const Text(
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore asperiores temporibus nemo debitis! Ad tenetur a cumque nemo ',
+        Text(
+          property.description,
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
         ),
@@ -96,14 +103,16 @@ class DetailsTabContent extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    Text('Check-in Time'),
+                    const Text('Check-in Time'),
                     Text(
-                      '07 : 30 AM',
-                      style: TextStyle(
+                      (property.isCheckInFlexible)
+                          ? 'Flexible'
+                          : '${property.checkInTime}',
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
@@ -116,14 +125,16 @@ class DetailsTabContent extends StatelessWidget {
                 width: 1,
                 color: Colors.black26,
               ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-                    Text('Check-out Time'),
+                    const Text('Check-out Time'),
                     Text(
-                      'Flexible',
-                      style: TextStyle(
+                      (property.isCheckOutFlexible)
+                          ? 'Flexible'
+                          : '${property.checkOutTime}',
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                       ),
@@ -153,25 +164,29 @@ class DetailsTabContent extends StatelessWidget {
             ),
           ],
         ),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.min,
           children: [
             CustomIconChip(
-              title: 'Wi-Fi',
-              path: 'assets/images/wifi.svg',
-            ),
-            CustomIconChip(
-              title: 'Air-\nconditioner',
-              path: 'assets/images/airConditioner.svg',
-            ),
-            CustomIconChip(
-              title: 'Home Theater',
+              title: property.amenities[0],
               path: 'assets/images/face.svg',
             ),
-            CustomIconChip(
-              title: 'Master Balcony',
-              path: 'assets/images/face.svg',
-            ),
+            if (property.amenities.length > 1)
+              CustomIconChip(
+                title: property.amenities[1],
+                path: 'assets/images/face.svg',
+              ),
+            if (property.amenities.length > 2)
+              CustomIconChip(
+                title: property.amenities[2],
+                path: 'assets/images/face.svg',
+              ),
+            if (property.amenities.length > 3)
+              CustomIconChip(
+                title: property.amenities[3],
+                path: 'assets/images/face.svg',
+              ),
           ],
         ),
         const Text(
@@ -202,10 +217,17 @@ class DetailsTabContent extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             child: GoogleMap(
               mapType: MapType.normal,
+              liteModeEnabled: true,
               initialCameraPosition: CameraPosition(
-                target: puneLocation,
-                zoom: 12,
+                target: LatLng(property.latitude, property.longitude),
+                zoom: 13,
               ),
+              markers: {
+                Marker(
+                  markerId: const MarkerId('id'),
+                  position: LatLng(property.latitude, property.longitude),
+                )
+              },
             ),
           ),
         ),
@@ -217,8 +239,9 @@ class DetailsTabContent extends StatelessWidget {
             fontSize: 18,
           ),
         ),
-        const Text(
-          "400 West 42nd Street, Hell's Kitchen, New York, NY 10036, United States",
+        Text(
+          // "400 West 42nd Street, Hell's Kitchen, New York, NY 10036, United States",
+          "${property.address}, ${property.streetAddress}, ${property.landmark}, ${property.city}, ${property.state}, ${property.pincode}",
           overflow: TextOverflow.ellipsis,
           maxLines: 2,
         ),
@@ -226,10 +249,7 @@ class DetailsTabContent extends StatelessWidget {
         CustomButton(
           text: 'Done',
           onTap: () {
-            Navigator.pushNamed(
-              context,
-              TermAndConditionsScreen.routeName,
-            );
+            Navigator.pop(context);
           },
         ),
       ],

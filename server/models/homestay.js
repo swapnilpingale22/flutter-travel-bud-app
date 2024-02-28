@@ -100,6 +100,10 @@ const homestaySchema = mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  coverPhoto: {
+    type: String,
+    required: true,
+  },
   photos: [
     {
       type: String,

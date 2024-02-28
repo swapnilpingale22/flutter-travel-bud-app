@@ -128,7 +128,7 @@ class _HostScreenState extends State<HostScreen> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.network(
-                                  data.photos[0],
+                                  data.coverPhoto,
                                   fit: BoxFit.cover,
                                 ),
                               ),

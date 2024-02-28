@@ -14,7 +14,7 @@ import 'package:travel_bud/screens/onbooarding/homestay_type.dart';
 import 'package:travel_bud/screens/login/login_screen.dart';
 import 'package:travel_bud/screens/onbooarding/location.dart';
 import 'package:travel_bud/screens/onbooarding/photos.dart';
-import 'package:travel_bud/screens/onbooarding/preview.dart';
+import 'package:travel_bud/screens/onbooarding/homestay_details_screen.dart';
 import 'package:travel_bud/screens/onbooarding/price_contact_details.dart';
 import 'package:travel_bud/screens/onbooarding/term_and_conditions.dart';
 
@@ -98,10 +98,13 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         builder: (_) => const PriceContactDetailsScreen(),
       );
 
-    case PreviewScreen.routeName:
+    case HomestayDetailsScreen.routeName:
+      var index = routeSettings.arguments as int;
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => const PreviewScreen(),
+        builder: (_) => HomestayDetailsScreen(
+          index: index,
+        ),
       );
 
     case HomestayPreviewScreen.routeName:

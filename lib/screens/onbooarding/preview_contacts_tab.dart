@@ -4,8 +4,8 @@ import 'package:travel_bud/common_widgets/custom_button.dart';
 import 'package:travel_bud/provider/homestay_provider.dart';
 import 'package:travel_bud/screens/onbooarding/term_and_conditions.dart';
 
-class ContactsTabContent2 extends StatelessWidget {
-  const ContactsTabContent2({
+class PreviewContactsTabContent extends StatelessWidget {
+  const PreviewContactsTabContent({
     super.key,
   });
 
